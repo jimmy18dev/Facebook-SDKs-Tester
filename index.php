@@ -4,6 +4,7 @@ session_start();
 if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 
 	require_once __DIR__ . '/facebook-sdk-v5/autoload.php';
+
 	$fb = new Facebook\Facebook([
 		'app_id' 				=> $_SESSION['AppID'],
 		'app_secret' 			=> $_SESSION['AppSecret'],
@@ -11,7 +12,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	]);
 
 	$helper = $fb->getRedirectLoginHelper();
-	$permissions = ['email']; // optional
+	$permissions = ['email','user_birthday','user_location','publish_actions']; // optional
 
 	try{
 		if(isset($_SESSION['facebook_access_token'])){
@@ -41,7 +42,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 		
 			// Exchanges a short-lived access token for a long-lived one
 			$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
-			$_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
+			// $_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
 			$_SESSION['facebook_longlived_token'] = (string) $longLivedAccessToken;
 
 			// setting default access token to be used in script
@@ -72,13 +73,13 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 		}
 	
 		// printing $profile array on the screen which holds the basic info about user'
-		// echo'<pre>';
-		// print_r($profile);
-		// echo'</pre>';
+		echo'<pre>';
+		print_r($profile_request);
+		echo'</pre>';
   		// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 	}else{
 		// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/Facebook-SDKs/index.php',$permissions);
+		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/Facebook-SDKs/fb-callback.php',$permissions);
 	}
 }
 
@@ -118,7 +119,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	<div class="form">
 		<form action="setup.php" method="post">
 			<div class="form-items">
-				<input type="text" class="input-text" placeholder="App ID" name="AppID">
+				<input type="text" class="input-text" placeholder="App ID" name="AppID" autofocus>
 			</div>
 			<div class="form-items">
 				<input type="text" class="input-text" placeholder="App Secret" name="AppSecret">
@@ -148,27 +149,23 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	</div>
 	<div class="message">
 		<div class="message-items">
-			<p class="caption">Access Token:</p>
-			<p><?php echo $_SESSION['facebook_access_token'];?></p>
+			<p class="caption">Access Token : <?php echo $_SESSION['fb_access_token'];?></p>
 		</div>
 		<div class="message-items">
-			<p class="caption">LongLived Access Token:</p>
-			<p><?php echo $_SESSION['facebook_longlived_token'];?></p>
+			<p class="caption">LongLived Access Token : <?php echo $_SESSION['facebook_longlived_token'];?></p>
 		</div>
 		<div class="message-items">
-			<p class="caption">Error:</p>
-			<p><?php echo (empty($error_log)?'null':$error_log);?></p>
+			<p class="caption">Error : <?php echo (empty($error_log)?'null':$error_log);?></p>
 		</div>
 		<div class="message-items">
-			<p class="caption">App ID:</p>
-			<p><?php echo $_SESSION['AppID'];?></p>
+			<p class="caption">App ID : <?php echo $_SESSION['AppID'];?></p>
 		</div>
 		<div class="message-items">
-			<p class="caption">App Secret:</p>
-			<p><?php echo (empty($_SESSION['AppSecret'])?'null':'xxxxxxxxxxxxxxxxxxxxxxxxxx');?></p>
+			<p class="caption">App Secret : <?php echo (empty($_SESSION['AppSecret'])?'null':'xxxxxxxxxxxxxxxxxxxxxxxxxx');?></p>
 		</div>
 
 		<a href="clear.php">Clear</a>
+		<a href="post-example.php">Post Example</a>
 	</div>
 	<?php }?>
 </div>
