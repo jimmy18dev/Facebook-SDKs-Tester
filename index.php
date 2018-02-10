@@ -8,11 +8,11 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	$fb = new Facebook\Facebook([
 		'app_id' 				=> $_SESSION['AppID'],
 		'app_secret' 			=> $_SESSION['AppSecret'],
-		'default_graph_version' => 'v2.5',
+		'default_graph_version' => 'v2.12',
 	]);
 
 	$helper = $fb->getRedirectLoginHelper();
-	$permissions = ['email','user_birthday','user_location','publish_actions']; // optional
+	$permissions = ['email']; // optional
 
 	try{
 		if(isset($_SESSION['facebook_access_token'])){
@@ -79,7 +79,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
   		// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 	}else{
 		// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/Facebook-SDKs/fb-callback.php',$permissions);
+		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/fb-callback.php',$permissions);
 	}
 }
 
