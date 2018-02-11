@@ -147,6 +147,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 		</a>
 		<?php }?>
 	</div>
+	
 	<div class="message">
 		<div class="message-items">
 			<p class="caption">Access Token : <?php echo $_SESSION['fb_access_token'];?></p>
