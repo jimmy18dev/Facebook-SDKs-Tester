@@ -15,8 +15,8 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	$permissions = ['email']; // optional
 
 	try{
-		if(isset($_SESSION['facebook_access_token'])){
-			$accessToken = $_SESSION['facebook_access_token'];
+		if(isset($_SESSION['fb_access_token'])){
+			$accessToken = $_SESSION['fb_access_token'];
 		}else{
   			$accessToken = $helper->getAccessToken();
 		}
@@ -31,22 +31,22 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
   	}
 
 	if(isset($accessToken)) {
-		if(isset($_SESSION['facebook_access_token'])) {
-			$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+		if(isset($_SESSION['fb_access_token'])) {
+			$fb->setDefaultAccessToken($_SESSION['fb_access_token']);
 		}else{
 			// getting short-lived access token
-			$_SESSION['facebook_access_token'] = (string) $accessToken;
+			$_SESSION['fb_access_token'] = (string) $accessToken;
 
 	  		// OAuth 2.0 client handler
 			$oAuth2Client = $fb->getOAuth2Client();
 		
 			// Exchanges a short-lived access token for a long-lived one
-			$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
-			// $_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
+			$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['fb_access_token']);
+			// $_SESSION['fb_access_token'] = (string) $longLivedAccessToken;
 			$_SESSION['facebook_longlived_token'] = (string) $longLivedAccessToken;
 
 			// setting default access token to be used in script
-			$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+			$fb->setDefaultAccessToken($_SESSION['fb_access_token']);
 		}
 
 		// redirect the user back to the same page if it has "code" GET variable
@@ -76,7 +76,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 		echo'<pre>';
 		print_r($profile_request);
 		echo'</pre>';
-  		// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
+  		// Now you can redirect to another page and use the access token from $_SESSION['fb_access_token']
 	}else{
 		// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
 		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/fb-callback.php',$permissions);
@@ -165,8 +165,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 			<p class="caption">App Secret : <?php echo (empty($_SESSION['AppSecret'])?'null':'xxxxxxxxxxxxxxxxxxxxxxxxxx');?></p>
 		</div>
 
-		<a href="clear.php">Clear</a>
-		<a href="post-example.php">Post Example</a>
+		<a href="clear.php">Clear Config</a>
 	</div>
 	<?php }?>
 </div>
