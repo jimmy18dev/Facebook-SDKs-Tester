@@ -11,76 +11,9 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 		'default_graph_version' => 'v2.12',
 	]);
 
-	$helper = $fb->getRedirectLoginHelper();
-	$permissions = ['email']; // optional
-
-	try{
-		if(isset($_SESSION['fb_access_token'])){
-			$accessToken = $_SESSION['fb_access_token'];
-		}else{
-  			$accessToken = $helper->getAccessToken();
-		}
-	}catch(Facebook\Exceptions\FacebookResponseException $e) {
- 		// When Graph returns an error
- 		$error_log = 'Graph returned an error: ' . $e->getMessage();
-  		exit;
-	}catch(Facebook\Exceptions\FacebookSDKException $e) {
- 		// When validation fails or other local issues
-		$error_log = 'Facebook SDK returned an error: ' . $e->getMessage();
-  		exit;
-  	}
-
-	if(isset($accessToken)) {
-		if(isset($_SESSION['fb_access_token'])) {
-			$fb->setDefaultAccessToken($_SESSION['fb_access_token']);
-		}else{
-			// getting short-lived access token
-			$_SESSION['fb_access_token'] = (string) $accessToken;
-
-	  		// OAuth 2.0 client handler
-			$oAuth2Client = $fb->getOAuth2Client();
-		
-			// Exchanges a short-lived access token for a long-lived one
-			$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['fb_access_token']);
-			// $_SESSION['fb_access_token'] = (string) $longLivedAccessToken;
-			$_SESSION['facebook_longlived_token'] = (string) $longLivedAccessToken;
-
-			// setting default access token to be used in script
-			$fb->setDefaultAccessToken($_SESSION['fb_access_token']);
-		}
-
-		// redirect the user back to the same page if it has "code" GET variable
-		if(isset($_GET['code'])){
-			// header('Location: index.php?msg=error');
-			$error_log = "isset(code) is Fail!";
-		}
-
-		// getting basic info about user
-		try {
-			$profile_request = $fb->get('/me?fields=id,email,name,first_name,last_name');
-			$profile = $profile_request->getGraphNode()->asArray();
-		} catch(Facebook\Exceptions\FacebookResponseException $e) {
-			// When Graph returns an error
-			$error_log = 'Graph returned an error: ' . $e->getMessage();
-			session_destroy();
-			// redirecting user back to app login page
-			// header("Location: index.php");
-			exit;
-		} catch(Facebook\Exceptions\FacebookSDKException $e) {
-			// When validation fails or other local issues
-			$error_log = 'Facebook SDK returned an error: ' . $e->getMessage();
-			exit;
-		}
-	
-		// printing $profile array on the screen which holds the basic info about user'
-		echo'<pre>';
-		print_r($profile_request);
-		echo'</pre>';
-  		// Now you can redirect to another page and use the access token from $_SESSION['fb_access_token']
-	}else{
-		// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-		$loginUrl = $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/fb-callback.php',$permissions);
-	}
+	$helper 		= $fb->getRedirectLoginHelper();
+	$permissions 	= ['email']; // optional
+	$loginUrl 		= $helper->getLoginUrl('http://'.$_SERVER['SERVER_NAME'].'/fb-callback.php',$permissions);
 }
 
 ?>
@@ -150,7 +83,8 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 	
 	<div class="message">
 		<div class="message-items">
-			<p class="caption">Access Token : <?php echo $_SESSION['fb_access_token'];?></p>
+			<p>Access Token</p>
+			<textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
 		</div>
 		<div class="message-items">
 			<p class="caption">LongLived Access Token : <?php echo $_SESSION['facebook_longlived_token'];?></p>

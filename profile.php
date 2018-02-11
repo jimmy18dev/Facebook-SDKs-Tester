@@ -34,6 +34,7 @@ $user = $response->getGraphUser();
 <p>Access Token</p>
 <textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
 
+<img src="https://graph.facebook.com/<?php echo $user['id'];?>/picture?type=square">
 <p><strong>Facebook ID</strong> <?php echo $user['id'];?></p>
 <p><strong>Email</strong> <?php echo $user['email'];?></p>
 <p><strong>Name</strong> <?php echo $user['name'];?></p>
