@@ -23,15 +23,157 @@ a[href], button {
 
 body{
     font-family: @FontStylePrimary;
-    background: #F7F7F7;
+    background: #FFFFFF;
     overflow-y:scroll;
     overflow-x:hidden;
 }
 
 .container{
-    width: 70%;
-    margin: 5% 15%;
+    width: 30%;
+    margin: 0% 35%;
+    margin-top: 7%;
     float: left;
     display: inline-block;
     background: #FFFFFF;
+
+    .head{
+        width: 100%;
+        float: left;
+        display: inline-block;
+        margin-bottom: 10%;
+        text-align: center;
+
+        h1{
+            font-size: 3em;
+            margin-bottom: 2%;
+            color: #333333;
+            font-weight: bold;
+        }
+        p{
+            font-size: 1em;
+            color: #999999;
+            font-style: italic;
+        }
+    }
+
+    .display{
+        width: 100%;
+        float: left;
+        display: inline-block;
+
+        .btn-login{
+            width: 100%;
+            padding: 4% 0%;
+            float: left;
+            display: inline-block;
+            text-align: center;
+            background: #3b5998;
+            color: #FFFFFF;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 5%;
+        }
+
+        .btn{
+            width: 100%;
+            padding: 4% 0%;
+            float: left;
+            display: inline-block;
+            text-align: center;
+            background: #BBBBBB;
+            color: #666666;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+
+        label{
+            width: 100%;
+            float: left;
+            display: inline-block;
+            font-size: 0.8em;
+            margin-bottom: 2%;
+            color: #333333;
+        }
+
+        img{
+            width: 20%;
+            margin: 3% 40%;
+            float: left;
+            display: inline-block;
+            border-radius: 50%;
+        }
+
+        textarea{
+            width: 90%;
+            float: left;
+            display: inline-block;
+            background: #EEEEEE;
+            border-radius: 5px;
+            border: 0px;
+            padding: 5%;
+            font-size: 0.9em;
+            margin: 0;
+            margin-bottom: 5%;
+            resize: none;
+            outline: none;
+        }
+
+        p{
+            font-size: 1em;
+            line-height: 1.5em;
+            strong{
+                font-weight: bold;
+            }
+        }
+    }
+
+    .form{
+        width: 100%;
+        float: left;
+        display: inline-block;
+
+        .input-text{
+            width: 90%;
+            padding: 4% 5%;
+            float: left;
+            display: inline-block;
+            font-size: 1.2em;
+            background: #EEEEEE;
+            border: 0px;
+            margin: 0px;
+            outline: none;
+            margin-bottom: 3%;
+            border-radius: 5px;
+
+            &:hover{
+                cursor: pointer;
+            }
+            &:focus{
+                background: #DDDDDD;
+            }
+        }
+
+        .btn-submit{
+            float: right;
+            display: inline-block;
+            font-size: 1.2em;
+            padding: 4% 8%;
+            line-height: 1em;
+            border-radius: 5px;
+            border: 0px;
+            margin: 0;
+            background: #111111;
+            color: #FFFFFF;
+
+            &:hover{
+                cursor: pointer;
+                background: #333333;
+            }
+        }
+    }
 }

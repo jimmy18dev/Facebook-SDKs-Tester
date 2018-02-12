@@ -33,9 +33,7 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 <meta name="viewport" content="user-scalable=no">
 <meta name="viewport" content="initial-scale=1,maximum-scale=1">	
 
-<?php include'favicon.php';?>
-
-<title>Facebook SDKs Tester.</title>
+<title>Facebook Login | PHP SDK v5 and API Version 2.12</title>
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="css/reset.css"/>
@@ -45,8 +43,10 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 
 <body>
 <div class="container">
-	<h1><a href="index.php">Facebook SDKs Tester.</a></h1>
-	<h2>with Facebook PHP SDK v5</h2>
+	<header class="head">
+		<h1>Facebook Login</h1>
+		<p>PHP SDK v5 and API Version 2.12</p>
+	</header>
 
 	<?php if(empty($_SESSION['AppID']) || empty($_SESSION['AppSecret'])){?>
 	<div class="form">
@@ -58,48 +58,24 @@ if(!empty($_SESSION['AppID']) && !empty($_SESSION['AppSecret'])){
 				<input type="text" class="input-text" placeholder="App Secret" name="AppSecret">
 			</div>
 			<div class="form-items">
-				<button type="submit" class="input-submit" >SETUP</button>
+				<button type="submit" class="btn-submit">SAVE</button>
 			</div>
 		</form>
 	</div>
 	<?php }else{?>
 	<div class="display">
-		<?php if(isset($accessToken)){?>
-		<div class="profile">
-			<div class="thumbnail">
-				<img src="https://graph.facebook.com/<?php echo $profile['id'];?>/picture?type=square" alt="">
-			</div>
-			<div class="detail">
-				<p><?php echo $profile['name'];?></p>
-				<p class="id"><?php echo $profile['email'];?></p>
-			</div>
-		</div>
-		<?php }else{?>
-		<a href="<?php echo $loginUrl;?>">
-		<div class="login-btn">Login to Facebook</div>
-		</a>
-		<?php }?>
-	</div>
-	
-	<div class="message">
-		<div class="message-items">
-			<p>Access Token</p>
-			<textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
-		</div>
-		<div class="message-items">
-			<p class="caption">LongLived Access Token : <?php echo $_SESSION['facebook_longlived_token'];?></p>
-		</div>
-		<div class="message-items">
-			<p class="caption">Error : <?php echo (empty($error_log)?'null':$error_log);?></p>
-		</div>
-		<div class="message-items">
-			<p class="caption">App ID : <?php echo $_SESSION['AppID'];?></p>
-		</div>
-		<div class="message-items">
-			<p class="caption">App Secret : <?php echo (empty($_SESSION['AppSecret'])?'null':'xxxxxxxxxxxxxxxxxxxxxxxxxx');?></p>
-		</div>
+		<a href="<?php echo $loginUrl;?>" class="btn-login">Login with Facebook</a>
 
-		<a href="clear.php">Clear Config</a>
+		<label>Access Token</label>
+		<textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
+
+		<label>LongLived Access Token:</label>
+		<textarea><?php echo $_SESSION['facebook_longlived_token'];?></textarea>
+
+		<p><strong>App ID</strong> <?php echo $_SESSION['AppID'];?></p>
+		<p><strong>App Secret</strong> <?php echo (empty($_SESSION['AppSecret'])?'null':'xxxxxxxxxxxxxxxxxxxxxxxxxx');?></p>
+		<p>Error : <?php echo (empty($error_log)?'null':$error_log);?></p>
+		<a class="btn" href="clear.php">Clear Config</a>
 	</div>
 	<?php }?>
 </div>

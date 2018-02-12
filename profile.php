@@ -28,19 +28,31 @@ $user = $response->getGraphUser();
 <head>
 	<meta charset="UTF-8">
 	<title>Profile</title>
+
+  <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
 <body>
-<a href="index.php">Return to Home</a>
-<p>Access Token</p>
-<textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
+<div class="container">
+  <header class="head">
+    <h1>Facebook Login</h1>
+    <p>PHP SDK v5 and API Version 2.12</p>
+  </header>
 
-<img src="https://graph.facebook.com/<?php echo $user['id'];?>/picture?type=square">
-<p><strong>Facebook ID</strong> <?php echo $user['id'];?></p>
-<p><strong>Email</strong> <?php echo $user['email'];?></p>
-<p><strong>Name</strong> <?php echo $user['name'];?></p>
-<p><strong>First Name</strong> <?php echo $user['first_name'];?></p>
-<p><strong>Last Name</strong> <?php echo $user['last_name'];?></p>
+  <div class="display">
+    <label>Access Token</label>
+    <textarea><?php echo $_SESSION['fb_access_token'];?></textarea>
 
-<a href="clear.php">Clear Config</a>
+    <img src="https://graph.facebook.com/<?php echo $user['id'];?>/picture?type=square">
+    <p><strong>Facebook ID</strong> <?php echo $user['id'];?></p>
+    <p><strong>Email</strong> <?php echo $user['email'];?></p>
+    <p><strong>Name</strong> <?php echo $user['name'];?></p>
+    <p><strong>First Name</strong> <?php echo $user['first_name'];?></p>
+    <p><strong>Last Name</strong> <?php echo $user['last_name'];?></p>
+
+    <a href="clear.php">Clear Config</a>
+    <a href="index.php">Return to Home</a>
+  </div>
+</div>
 </body>
 </html>
