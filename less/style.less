@@ -23,163 +23,157 @@ a[href], button {
 
 body{
     font-family: @FontStylePrimary;
-    background: #F7F7F7;
+    background: #FFFFFF;
     overflow-y:scroll;
     overflow-x:hidden;
 }
 
 .container{
-    width: 80%;
-    margin: 5% 10%;
+    width: 30%;
+    margin: 0% 35%;
+    margin-top: 7%;
     float: left;
     display: inline-block;
+    background: #FFFFFF;
 
-    h1{
-        font-size: 1.8em;
-        color: #111111;
-
-        a{
-            color: #111111;
-            text-decoration: none;
-        }
-    }
-    h2{
-        font-size: 0.8;
-        color: #555555;
-        line-height: 1.5em;
-    }
-
-    .form{
+    .head{
         width: 100%;
-        padding: 2% 0%;
         float: left;
         display: inline-block;
+        margin-bottom: 10%;
+        text-align: center;
 
-        .form-items{
-            width: 100%;
-            float: left;
-            display: inline-block;
+        h1{
+            font-size: 3em;
+            margin-bottom: 2%;
+            color: #333333;
+            font-weight: bold;
         }
-
-        .input-text{
-            width: 20%;
-            padding: 0.5% 0%;
-            float: left;
-            display: inline-block;
+        p{
             font-size: 1em;
-            line-height: 1.5em;
-            border: 0px;
-            border-bottom: 1px solid #EEEEEE;
-            background: #F7F7F7;
-            margin-bottom: 3%;
-            outline: 0;
-        }
-        .input-submit{
-            padding: 1% 4%;
-            float: left;
-            display: inline-block;
-            font-size: 0.8em;
-            line-height: 1.5em;
-            background: #333333;
-            color: #FFFFFF;
-            border: 0px;
+            color: #999999;
+            font-style: italic;
         }
     }
 
     .display{
         width: 100%;
-        padding: 2% 0%;
         float: left;
         display: inline-block;
 
-        .login-btn{
+        .btn-login{
+            width: 100%;
+            padding: 4% 0%;
             float: left;
             display: inline-block;
-            font-size: 0.9em;
-            padding: 1% 5%;
             text-align: center;
             background: #3b5998;
             color: #FFFFFF;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
             font-weight: bold;
+            margin-bottom: 5%;
         }
-        .profile{
+
+        .btn{
+            width: 100%;
+            padding: 4% 0%;
+            float: left;
+            display: inline-block;
+            text-align: center;
+            background: #BBBBBB;
+            color: #666666;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+
+        label{
             width: 100%;
             float: left;
             display: inline-block;
+            font-size: 0.8em;
+            margin-bottom: 2%;
+            color: #333333;
+        }
 
-            .thumbnail{
-                width: 100%;
-                float: left;
-                display: inline-block;
-                margin-bottom: 1%;
+        img{
+            width: 20%;
+            margin: 3% 40%;
+            float: left;
+            display: inline-block;
+            border-radius: 50%;
+        }
 
-                img{
-                    width: 40px;
-                    float: left;
-                    display: inline-block;
-                    border-radius: 50%;
-                }
-            }
-            .detail{
-                width: 100%;
-                float: left;
-                display: inline-block;
-                text-align: left;
+        textarea{
+            width: 90%;
+            float: left;
+            display: inline-block;
+            background: #EEEEEE;
+            border-radius: 5px;
+            border: 0px;
+            padding: 5%;
+            font-size: 0.9em;
+            margin: 0;
+            margin-bottom: 5%;
+            resize: none;
+            outline: none;
+        }
 
-                p{
-                    color: #3b5998;
-                    font-size: 1em;
-                    line-height: 1.5em;
-                    font-weight: bold;
-                }
-                p.id{
-                    font-size: 0.8em;
-                    color: #777777;
-                    font-weight: normal;
-                }
+        p{
+            font-size: 1em;
+            line-height: 1.5em;
+            strong{
+                font-weight: bold;
             }
         }
     }
 
-    .message{
+    .form{
         width: 100%;
         float: left;
         display: inline-block;
-        text-align: left;
 
-        .message-items{
-            width: 100%;
+        .input-text{
+            width: 90%;
+            padding: 4% 5%;
             float: left;
             display: inline-block;
-            margin-bottom: 1%;
-            // word-wrap: break-word;
+            font-size: 1.2em;
+            background: #EEEEEE;
+            border: 0px;
+            margin: 0px;
+            outline: none;
+            margin-bottom: 3%;
+            border-radius: 5px;
 
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-
-            p{
-                font-size: 0.8em;
-                line-height: 1.5em;
-                color: #555555;
-
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
+            &:hover{
+                cursor: pointer;
             }
-            p.caption{
-                color: #3b5998;
-                font-weight: bold;
+            &:focus{
+                background: #DDDDDD;
             }
         }
 
-        a{
-            padding: 1% 2%;
-            background: #EEEEEE;
-            float: left;
-            color: #555555;
-            font-size: 0.8em;
-            text-decoration: none;
+        .btn-submit{
+            float: right;
+            display: inline-block;
+            font-size: 1.2em;
+            padding: 4% 8%;
+            line-height: 1em;
+            border-radius: 5px;
+            border: 0px;
+            margin: 0;
+            background: #111111;
+            color: #FFFFFF;
+
+            &:hover{
+                cursor: pointer;
+                background: #333333;
+            }
         }
     }
 }
